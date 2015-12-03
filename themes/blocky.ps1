@@ -1,4 +1,4 @@
-function global:prompt {
+﻿function global:prompt {
     $realCommandStatus = $?
     $realLASTEXITCODE = $LASTEXITCODE
     $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
@@ -13,6 +13,6 @@ function global:prompt {
       $BG_EXIT="Red"
     }
     $global:LASTEXITCODE = $realLASTEXITCODE
-    Write-Host "`n λ " -NoNewLine -ForegroundColor White -BackgroundColor $BG_EXIT
+    Write-Host "`n > " -NoNewLine -ForegroundColor White -BackgroundColor $BG_EXIT
     return " "
 }
