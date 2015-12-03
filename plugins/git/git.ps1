@@ -1,6 +1,6 @@
 try {
     Get-command -Name "git" -ErrorAction Stop >$null
-    if (Get-Module "posh-git") {
+    if (Get-Module "posh-git" -ListAvailable) {
         $gitStatus = $true
     } else { throw }
 } catch {
