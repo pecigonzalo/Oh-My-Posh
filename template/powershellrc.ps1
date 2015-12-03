@@ -6,3 +6,6 @@ $plugins= "git", "ls"
 
 # Theme
 $theme = ""
+
+# Debugging options
+$Log_Level = ""
