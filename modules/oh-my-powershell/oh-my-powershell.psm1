@@ -3,7 +3,7 @@
 If ( Test-Path ("$Env:USERPROFILE\.powershellrc.ps1") ) {
     Write-Host "Detected a Oh-My-Powershell Profile"
 } else {
-    cp $Env:USERPROFILE"\template\.powershellrc.ps1"
+    cp $Env:USERPROFILE"\template\.powershellrc.ps1" $Env:USERPROFILE"\.powershellrc.ps1"
 }
 
 # Load Profile
