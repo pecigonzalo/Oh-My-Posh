@@ -5,7 +5,7 @@
 $plugins= "git", "ls"
 
 # Theme
-$theme = ""
+$theme = "Golagola"
 
 # Debugging options
 $Log_Level = ""

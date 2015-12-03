@@ -5,8 +5,4 @@ foreach ($plugin in $plugins) {
 }
 
 # Load theme
-If ( $theme -eq $null -or $theme -eq "" ) {
-  $theme = "Blocky"
-}
-
 . "$Env:USERPROFILE\.oh-my-powershell\themes\$theme.ps1"
