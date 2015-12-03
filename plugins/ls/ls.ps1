@@ -125,5 +125,5 @@ function Get-ChildItem-Format-Wide {
     Invoke-Expression ("Get-ChildItem-Color $New_Args")
 }
 
-Set-Alias ll Get-ChildItem-Color -option AllScope
-Set-Alias ls Get-ChildItem-Format-Wide -option AllScope
+Set-Alias ll Get-ChildItem-Color -option AllScope -Scope Global
+Set-Alias ls Get-ChildItem-Format-Wide -option AllScope -Scope Global
