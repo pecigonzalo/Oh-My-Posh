@@ -1,7 +1,6 @@
 ﻿function global:prompt {
     $realCommandStatus = $?
     $realLASTEXITCODE = $LASTEXITCODE
-    $Host.UI.RawUI.ForegroundColor = $GitPromptSettings.DefaultForegroundColor
     $Path = $pwd.ProviderPath
     Write-Host " $Path " -NoNewLine -ForegroundColor Black -BackgroundColor White
     if($gitStatus){

@@ -1,16 +1,16 @@
-#
-# Create funtion to quickly get git graph
-#
-
 try {
     Get-command -Name "git" -ErrorAction Stop >$null
-    Import-Module -Name "posh-git" -ErrorAction Stop >$null
-    $gitStatus = $true
+    if (Get-Module "posh-git") {
+        $gitStatus = $true
+    } else { throw }
 } catch {
     Write-Warning "Missing git support, install posh-git with 'Install-Module posh-git' and restart cmder."
     $gitStatus = $false
 }
 
+#
+# Create funtion to quickly get git graph
+#
 function gitlog {
   git log --oneline --all --graph --decorate -n 30
 }
