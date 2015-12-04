@@ -1,3 +1,14 @@
+# Debugging options
+$Log_Level = ""
+
+# Modules
+# User this section if you want to delegate module loading to Oh-My-Powershell
+$Modules = ""
+# Download modules if missing?
+$Modules_Install = $false
+# Uninstall any modules not specified here
+$Modules_Strict = $false
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-powershell/plugins/*)
 # Custom plugins may be added to ~/.oh-my-powershell/custom/plugins/
 # Example format: $plugins= "git", "ls", "math"
@@ -6,6 +17,3 @@ $plugins= "git", "ls"
 
 # Theme
 $theme = "Golagola"
-
-# Debugging options
-$Log_Level = ""
