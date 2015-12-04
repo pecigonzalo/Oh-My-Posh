@@ -15,7 +15,7 @@ function gitlog {
   git log --oneline --all --graph --decorate -n 30
 }
 
-function checkGit($Path) {
+function checkGit($Path = "") {
     if (Test-Path -Path (Join-Path $Path '.git/') ) {
         Write-VcsStatus
         return

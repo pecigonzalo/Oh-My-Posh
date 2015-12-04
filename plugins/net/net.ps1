@@ -16,7 +16,7 @@
 
 function Get-IPs() {
    $ent = [net.dns]::GetHostEntry([net.dns]::GetHostName())
-   return $ent.AddressList | ?{ $_.ScopeId -ne 0 } | %{
+   return $ent.AddressList | Where-Object { $_.ScopeId -ne 0 } | ForEach-Object {
       [string]$_
    }
 }
