@@ -11,9 +11,9 @@ function Connect-ExchangeOnline{
   $s = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $cred -Authentication Basic -AllowRedirection -SessionOption $proxysettings -Verbose
   Import-PSSession $s
 }
-function Connect-ExchangeLocal{
+function Connect-ExchangeLocal ( [string]$Server = "" ) {
   $cred = Get-Credential
-  $s = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri http://hqexg02/powershell -Authentication Kerberos -Credential $cred -AllowRedirection -Verbose
+  $s = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri $Server -Authentication Kerberos -Credential $cred -AllowRedirection -Verbose
   Import-PSSession $s
 }
 

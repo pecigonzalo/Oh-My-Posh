@@ -1,7 +1,7 @@
 #
 # Functions to handle modules and installation of them
 #
-function Install ($Module) {
+function Install ($Module = "") {
   $Name = $Module.Split(":")[0]
   $Version = $Module.Split(":")[1]
 
@@ -12,8 +12,8 @@ function Install ($Module) {
   }
 }
 
-function Clean ($Modules) {
-  $Installed_Modules = Get-Module -ListAvailable | where {$_.Path -like "$([Environment]::GetFolderPath("mydocuments"))\WindowsPowerShell\Modules*"}
+function Clean ($Modules = "") {
+  $Installed_Modules = Get-Module -ListAvailable | Where-Object {$_.Path -like "$([Environment]::GetFolderPath("mydocuments"))\WindowsPowerShell\Modules*"}
   foreach ($Installed in $Installed_Modules) {
     if ( $Installed.Name -eq "oh-my-powershell" ) {
       # Do not remove myself

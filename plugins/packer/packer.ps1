@@ -6,7 +6,7 @@ function Combine-Packer {
     [switch]$Run
   )
 
-  $filesToParse = Get-ChildItem | where {$_.Name -Like "*.packer.json"}
+  $filesToParse = Get-ChildItem | Where-Object {$_.Name -Like "*.packer.json"}
   $filesObject = $filesToParse | Get-Content -Raw | ConvertFrom-Json
 
   $baseJson = @"

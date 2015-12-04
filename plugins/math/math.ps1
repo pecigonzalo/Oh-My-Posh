@@ -34,7 +34,7 @@
 # Covnersion
 #
 
-function ConvertTo-Hex([long] $dec) 
+function ConvertTo-Hex([long] $dec = 0) 
 {
    return "0x" + $dec.ToString("X")
 }

@@ -59,12 +59,12 @@ function Get-ChildItem-Color {
     $pad = 4
 
     # get the longest string and get the length
-    $childs = Invoke-Expression ("Get-ChildItem $Args")
+    $childs = Get-ChildItem $Args
     $lnStr = $childs | select-object Name | sort-object { "$_".length } -descending | select-object -first 1
     $len = $lnStr.name.length
 
     $childs |
-    %{
+    ForEach-Object {
         if ($_.GetType().Name -eq 'DirectoryInfo') {
             $c = 'Green'
         } elseif ($_.Name -match $hidden_files) {
@@ -94,7 +94,7 @@ function Get-ChildItem-Color {
             Write-Host $towrite -Fore $c -nonewline
 
             if ( $count -ge ($width - ($len+$pad)) ) {
-              write-host ""
+              Write-Host ""
               $count = 0
             }
         } else {
@@ -122,8 +122,8 @@ function Get-ChildItem-Color {
 function Get-ChildItem-Format-Wide {
     $New_Args = @($true)
     $New_Args += $Args
-    Invoke-Expression ("Get-ChildItem-Color $New_Args")
+    Get-ChildItem-Color $New_Args
 }
 
-Set-Alias ll Get-ChildItem-Color -option AllScope -Scope Global
-Set-Alias ls Get-ChildItem-Format-Wide -option AllScope -Scope Global
+Set-Alias -Name ll -Value Get-ChildItem-Color -option AllScope -Scope Global
+Set-Alias -Name ls -Value Get-ChildItem-Format-Wide -option AllScope -Scope Global

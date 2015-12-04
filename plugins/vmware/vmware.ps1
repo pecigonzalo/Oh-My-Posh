@@ -42,9 +42,8 @@ if ($EnableVMWarePS -eq $true) {
     function LoadSnapins(){
        $snapinList = @( "VMware.VimAutomation.Core", "VMware.VimAutomation.License", "VMware.DeployAutomation", "VMware.ImageBuilder", "VMware.VimAutomation.Cloud")
 
-       $loaded = Get-PSSnapin -Name $snapinList -ErrorAction SilentlyContinue | % {$_.Name}
-       $registered = Get-PSSnapin -Name $snapinList -Registered -ErrorAction SilentlyContinue  | % {$_.Name}
-       $notLoaded = $registered | ? {$loaded -notcontains $_}
+       $loaded = Get-PSSnapin -Name $snapinList -ErrorAction SilentlyContinue | ForEach-Object {$_.Name}
+       $registered = Get-PSSnapin -Name $snapinList -Registered -ErrorAction SilentlyContinue  | ForEach-Object {$_.Name}
 
        foreach ($snapin in $registered) {
           if ($loaded -notcontains $snapin) {
@@ -87,7 +86,7 @@ if ($EnableVMWarePS -eq $true) {
         $global:originalTabExpansionFunction = $function:TabExpansion
 
         function global:TabExpansion {
-           param($line, $lastWord)
+           param($line="", $lastWord="")
 
            $originalResult = & $global:originalTabExpansionFunction $line $lastWord
 
@@ -170,7 +169,7 @@ if ($EnableVMWarePS -eq $true) {
 
                        if($values) {
                           if ($startsWith) {
-                              return ($values | where { $_ -like "${startsWith}*" })
+                              return ($values | Where-Object { $_ -like "${startsWith}*" })
                           } else {
                               return $values
                           }
@@ -190,7 +189,7 @@ if ($EnableVMWarePS -eq $true) {
 
     [void][Reflection.Assembly]::LoadWithPartialName("VMware.Vim")
 
-    function global:New-DatastoreDrive([string] $Name, $Datastore){
+    function global:New-DatastoreDrive([string] $Name="", $Datastore=""){
       begin {
         if ($Datastore) {
           Write-Output $Datastore | New-DatastoreDrive -Name $Name
@@ -271,15 +270,15 @@ if ($EnableVMWarePS -eq $true) {
 
 
     # Aliases
-    set-alias Get-VIServer Connect-VIServer -Scope Global
-    set-alias Get-VC Connect-VIServer -Scope Global
-    set-alias Get-ESX Connect-VIServer -Scope Global
-    set-alias Answer-VMQuestion Set-VMQuestion -Scope Global
-    set-alias Get-PowerCLIDocumentation Get-PowerCLIHelp -Scope Global
-    set-alias Get-VIToolkitVersion Get-PowerCLIVersion -Scope Global
-    set-alias Get-VIToolkitConfiguration Get-PowerCLIConfiguration -Scope Global
-    set-alias Set-VIToolkitConfiguration Set-PowerCLIConfiguration -Scope Global
-    set-alias Export-VM Export-VApp -Scope Global
+    set-alias -Name Get-VIServer -Value Connect-VIServer -Scope Global
+    set-alias -Name Get-VC -Value Connect-VIServer -Scope Global
+    set-alias -Name Get-ESX -Value Connect-VIServer -Scope Global
+    set-alias -Name Answer-VMQuestion -Value Set-VMQuestion -Scope Global
+    set-alias -Name Get-PowerCLIDocumentation -Value Get-PowerCLIHelp -Scope Global
+    set-alias -Name Get-VIToolkitVersion -Value Get-PowerCLIVersion -Scope Global
+    set-alias -Name Get-VIToolkitConfiguration -Value Get-PowerCLIConfiguration -Scope Global
+    set-alias -Name Set-VIToolkitConfiguration -Value Set-PowerCLIConfiguration -Scope Global
+    set-alias -Name Export-VM -Value Export-VApp -Scope Global
 
     # Uid utilities
     $global:UidUtil = [VMware.VimAutomation.ViCore.Cmdlets.Utilities.UidUtil]::Create()
@@ -336,14 +335,14 @@ function Remove-OrphanedData {
         $ds = Get-Datastore -Name $ds
       }
       if($ds.Type -eq "VMFS" -and $ds.ExtensionData.Summary.MultipleHostAccess){
-        Get-VM -Datastore $ds | %{
-          $_.Extensiondata.LayoutEx.File | where{"diskDescriptor","diskExtent" -contains $_.Type} | %{
+        Get-VM -Datastore $ds | ForEach-Object{
+          $_.Extensiondata.LayoutEx.File | Where-Object{"diskDescriptor","diskExtent" -contains $_.Type} | ForEach-Object{
             $fldList[$_.Name.Split('/')[0]] = $_.Name
             $hdList[$_.Name] = $_.Name
           }
         }
-        Get-Template | where {$_.DatastoreIdList -contains $ds.Id} | %{
-          $_.Extensiondata.LayoutEx.File | where{"diskDescriptor","diskExtent" -contains $_.Type} | %{
+        Get-Template | Where-Object {$_.DatastoreIdList -contains $ds.Id} | ForEach-Object{
+          $_.Extensiondata.LayoutEx.File | Where-Object{"diskDescriptor","diskExtent" -contains $_.Type} | ForEach-Object{
             $fldList[$_.Name.Split('/')[0]] = $_.Name
             $hdList[$_.Name] = $_.Name
           }
@@ -390,8 +389,8 @@ function Remove-OrphanedData {
               }
             }
           }
-          elseif($folder.File | where {"cos.vmdk","esxconsole.vmdk" -notcontains $_.Path}){
-            $folder.File | %{
+          elseif($folder.File | Where-Object {"cos.vmdk","esxconsole.vmdk" -notcontains $_.Path}){
+            $folder.File | ForEach-Object{
               New-Object PSObject -Property @{
                 Folder = $folder.FolderPath
                 Name = $_.Path
@@ -403,7 +402,7 @@ function Remove-OrphanedData {
             }
             if($Delete){
               if($folder.FolderPath -eq $rootPath){
-                $folder.File | %{
+                $folder.File | ForEach-Object{
                   If ($PSCmdlet.ShouldProcess(($folder.FolderPath + " " + $_.Path),"Remove VMDK")){
                     $dsBrowser.DeleteFile($folder.FolderPath + $_.Path)
                   }
@@ -617,9 +616,9 @@ function Get-VMCreationDate {
 
   process {
     foreach ($vm in $VMnames){
-      $ReportedVM = ""|Select VMname,CreatedTime,CreatedMonth,CreationMethod,Creator
+      $ReportedVM = ""|Select-Object VMname,CreatedTime,CreatedMonth,CreationMethod,Creator
       if ($CollectedEvent=$vm|Get-VMEvents -types 'VmBeingDeployedEvent','VmRegisteredEvent','VmClonedEvent','VmBeingCreatedEvent' -ErrorAction SilentlyContinue){
-        if($CollectedEvent.gettype().isArray){$CollectedEvent=$CollectedEvent|?{$_ -is [vmware.vim.VmRegisteredEvent]}}
+        if($CollectedEvent.gettype().isArray){$CollectedEvent=$CollectedEvent| Where-Object{$_ -is [vmware.vim.VmRegisteredEvent]}}
 
         $CollectedEventType=$CollectedEvent.gettype().name
         $CollectedEventMonth = "{0:MMMM}" -f $CollectedEvent.CreatedTime
@@ -715,8 +714,6 @@ function Transfer-Alarm {
     $cid
   }
 
-  # do you want to modify existing alarms or just import new ones?
-  $mod=$False
   # Note the script will NOT delete any alarms in the dest vcenter, even if they do not exist in the src vcenter
 
   Set-Variable -Name alarmLength -Value 80 -Option "constant" -erroraction silentlycontinue
@@ -726,7 +723,6 @@ function Transfer-Alarm {
   ####
   #connect to Server
   $vc1 = $Server
-  $vc1conn = connect-viserver $vc1
 
   $to=Get-Datacenter $NewCluster | Get-View
 
@@ -750,7 +746,6 @@ function Transfer-Alarm {
     # Replace the regex with something suitable for your environment
     # If you want to copy everything just replace the next line with 'if ( $true )'
     if( $_.Info.Name -match $Alarmnames ){
-      $alarm = $_
       $myalarms.add($_)
       # We need to check for MetricAlarmExpressions.
       # It seems that Alarms containing MetricAlarmExpression will always have either an OrAlarmExpression or an AndAlarmExpression, even if tehy just have a single trigger
@@ -782,14 +777,9 @@ function Transfer-Alarm {
   Disconnect-VIServer $vc1
   # ... and connect to the dest vc
   $vc2 = $Server
-  $vc2conn = connect-viserver $vc2
-
-  #get the inventory root folder
-  $vc2root=(get-view serviceinstance).content.rootFolder
 
   # get the alarm manager
   $vc2alMgr=get-view (get-view serviceinstance).content.alarmManager
-  $vc2alarms = get-view $vc2alMgr.GetAlarm($vc1root)
 
   # get the performance manager
   $vc2perfMgr = Get-View (get-view serviceinstance -server $vc2).Content.PerfManager
@@ -905,7 +895,7 @@ function Kill-VM {
       Write-Host "$($VM.Name) is already Powered Off"
     } Else {
       $esxcli = Get-EsxCli -vmhost ($VM.Host)
-      $WorldID = ($esxcli.vm.process.list() | Where { $_.DisplayName -eq $VM.Name}).WorldID
+      $WorldID = ($esxcli.vm.process.list() | Where-Object { $_.DisplayName -eq $VM.Name}).WorldID
       if (-not $KillType) {
         $KillType = "soft"
       }
