@@ -1,3 +1,6 @@
+# Install modules
+. "$Env:USERPROFILE\.oh-my-powershell\tools\modules.ps1"
+
 # Handle Plugins
 foreach ($plugin in $plugins) {
   Write-Verbose  "$Env:USERPROFILE\.oh-my-powershell\plugins\$plugin\$plugin.ps1"
