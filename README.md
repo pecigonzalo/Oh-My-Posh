@@ -24,4 +24,12 @@ Add the following line to your powershell profile:
 ```
 Import-Module "Oh-My-Powershell" -DisableNameChecking -NoClobber
 ```
+Now reload your powersell profile
 
+# Configuration
+
+Configuration parameters are found under
+```
+$env:USERPROFILE\.powershellrc.ps1
+```
+Open it with your prefered editor and change as you want, keep in mind some functionality is still WIP but dont hesistate on repoting any issue you have.
