@@ -1,5 +1,5 @@
 # SID mapping functions
-function ConvertTo-User($stringSid = "" {
+function ConvertTo-User($stringSid = "") {
   $objSID = New-Object System.Security.Principal.SecurityIdentifier($stringSid) 
   $objUser = $objSID.Translate([System.Security.Principal.NTAccount]) 
   $objUser.Value
