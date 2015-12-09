@@ -5,13 +5,16 @@ Oh-My-Powershell is a **WIP** Oh-My-Zsh implementation for powershell, plus some
 Please feel free to submit issues/pull requests/questions/feature reqeusts.
 
 **TODO:**
-* Auto Import Modules
+* ~~Auto Import Modules~~
+* Rename to Oh-My-POSH
 * Module Dep Management
 * More Themes
 * Add Pester tests
 * Properly comment code
 * Add info on plugin README.md files
 * Add DEBUG/VERBOSE levels and handling
+* AutoUpdate handler
+* Uninstall script
 
 # Installation Instructions
 
