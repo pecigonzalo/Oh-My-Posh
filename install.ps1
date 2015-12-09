@@ -7,12 +7,12 @@ param (
 # Utilities
 #
 function Install-OMP {
+  Write-Output "Deleting $Env:USERPROFILE\.oh-my-powershell"
+  Remove-Item -Force -Recurse "$Env:USERPROFILE\.oh-my-powershell" -ErrorAction SilentlyContinue
   if ($local) {
     # Deploy from current folder
-    Write-Output "Deleting $Env:USERPROFILE\.oh-my-powershell"
-    Remove-Item -Force -Recurse "$Env:USERPROFILE\.oh-my-powershell" -ErrorAction SilentlyContinue
     Write-Output "Coping Oh-My-Powershell to its destination"
-    Copy-Item -Recurse -Force .\  "$Env:USERPROFILE\.oh-my-powershell"
+    Copy-Item -Recurse -Force .\  "$Env:USERPROFILE\.oh-my-powershell\"
   } else {
     # Clone project
     Write-Output "Cloning Oh-My-Powershell from Github"
