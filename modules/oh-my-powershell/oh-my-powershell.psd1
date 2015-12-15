@@ -12,7 +12,7 @@
  RootModule = 'oh-my-powershell.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.2'
+ModuleVersion = '0.3'
 
 # ID used to uniquely identify this module
 GUID = '5f403c28-05ed-4be1-ae0a-7fcfab30b4df'
@@ -30,7 +30,7 @@ Copyright = 'Copyright (c) 2015 MIT.'
 Description = 'Oh-My-Powershell Magic'
 
 # Minimum version of the Windows PowerShell engine required by this module
-PowerShellVersion = '5.0'
+PowerShellVersion = '4.0'
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''
