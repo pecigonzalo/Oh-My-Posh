@@ -30,15 +30,17 @@ if ( $Modules_Strict ) {
 }
 # Install/Load all modules
 foreach ($Module in $Modules) {
-  if ( $Modules_Install ) {
-    Install($Module)
-  }
-  try {
-    $Name = $Module.Split(":")[0]
-    Import-Module $Name -ErrorAction Stop -DisableNameChecking -NoClobber
-    Write-Host "Loaded Module $Name"
-  } catch {
-    Write-Warning $_
+  if ($Module) {
+    if ( $Modules_Install ) {
+      Install($Module)
+    }
+    try {
+      $Name = $Module.Split(":")[0]
+      Import-Module $Name -ErrorAction Stop -DisableNameChecking -NoClobber -Global
+      Write-Host "Loaded Module $Name"
+    } catch {
+      Write-Warning $_
+    }
   }
 }
 
