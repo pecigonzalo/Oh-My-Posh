@@ -3,8 +3,12 @@
 
 # Handle Plugins
 foreach ($plugin in $plugins) {
-  Write-Verbose  "$Env:USERPROFILE\.oh-my-powershell\plugins\$plugin\$plugin.ps1"
-  . "$Env:USERPROFILE\.oh-my-powershell\plugins\$plugin\$plugin.ps1"
+  Write-Verbose  "Loading from: $Env:USERPROFILE\.oh-my-powershell\plugins\$plugin"
+  $files = Get-ChildItem $Env:USERPROFILE\.oh-my-powershell\plugins\$plugin -Filter *.ps1
+  foreach ($file in $files) {
+    Write-Verbose  "  Loading file: $($file.FullName)"
+    . $file.FullName
+  }
 }
 
 # Load theme
