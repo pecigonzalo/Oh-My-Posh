@@ -1,4 +1,6 @@
 # Oh-My-Powershell
+
+[![Join the chat at https://gitter.im/pecigonzalo/Oh-My-Powershell](https://badges.gitter.im/pecigonzalo/Oh-My-Powershell.svg)](https://gitter.im/pecigonzalo/Oh-My-Powershell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 After getting tired of mantaining my powershell profile, i decided to split the components and improve it, as i already use Oh-My-Zsh i tought i would be a good idea to have something similar on Powershell.
 
 Please feel free to submit issues/pull requests/questions/feature reqeusts.
