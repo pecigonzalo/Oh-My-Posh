@@ -3,6 +3,7 @@
 Push-Location "$Env:USERPROFILE\.oh-my-powershell"
 git pull --rebase --stat origin master
 if ($LASTEXITCODE) {
+  Pop-Location
   Write-Host "Something went wrong with the git pull, unable to update" -ForegroundColor Red
   exit 1
 }
