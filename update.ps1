@@ -17,6 +17,7 @@ Copy-Item -Recurse -Force $Env:USERPROFILE\.oh-my-powershell\modules\oh-my-power
 # If all good, let the user know
 if ($?) {
   Write-Host "Updated Oh-My-Powershell successfully!" -ForegroundColor Green
+  Write-Host 'PLEASE RELOAD YOUR PROFILE DOING: .$PROFILE' -ForegroundColor Green
 } else {
   Write-Host "Something went wrong with the update, you might need to reinstall" -ForegroundColor Red
 }
