@@ -18,9 +18,11 @@ function Install-OMP {
     Write-Output "Cloning Oh-My-Powershell from Github"
     git clone https://github.com/pecigonzalo/Oh-My-Powershell.git $Env:USERPROFILE\.oh-my-powershell
   }
-# Copy module to the user modules folder
-Write-Output "Installting Oh-My-Powershell Module"
-Copy-Item -Recurse -Force $Env:USERPROFILE\.oh-my-powershell\modules\oh-my-powershell  "$([Environment]::GetFolderPath("mydocuments"))\WindowsPowerShell\Modules\"
+  # Copy module to the user modules folder
+  Write-Output "Installting Oh-My-Powershell Module"
+  New-Item -Type Directory "$([Environment]::GetFolderPath("mydocuments"))\WindowsPowerShell\Modules" -Force | Out-Null
+  Copy-Item -Recurse -Force $Env:USERPROFILE\.oh-my-powershell\modules\oh-my-powershell  `
+    "$([Environment]::GetFolderPath("mydocuments"))\WindowsPowerShell\Modules\"
 }
 
 #
