@@ -6,7 +6,34 @@ param (
 #
 # Utilities
 #
+function Check-Dependencies {
+  $exit = 0
+  # Check git installed
+  try {
+    Get-Command git -ErrorAction Stop | Out-Null
+  } catch {
+    Write-Error "Git not found, please install git or add it to your PATH before running again"
+    $exit = 1
+  }
+  # If any errors exit install
+  if ($exit) { exit 1 }
+}
+
+function Check-Recommends {
+  # Check PSCX installed
+  if (!(Get-Module PSCX -ListAvailable)) {
+    Write-Warning "PSCX not found, while not required it is recommended: https://www.powershellgallery.com/packages/Pscx/"
+  }
+  # Check PSColor installed
+  if (!(Get-Module PSColor -ListAvailable)) {
+    Write-Warning "PSColor not found, while not required it is recommended: https://github.com/pecigonzalo/pscolor"
+  }
+}
+
 function Install-OMP {
+  Check-Recommends
+  Check-Dependencies
+
   Write-Output "Deleting $Env:USERPROFILE\.oh-my-powershell"
   Remove-Item -Force -Recurse "$Env:USERPROFILE\.oh-my-powershell" -ErrorAction SilentlyContinue
   if ($local) {
@@ -28,15 +55,13 @@ function Install-OMP {
 #
 # Install logic
 #
-
-if ( $force -eq $true ) {
-  Install-OMP
-} else {
-  # Check if Oh-My-Powershell is already installed
-  if ( Test-Path $Env:USERPROFILE\.oh-my-powershell ) {
-    Write-Output "Oh-My-Powershell is already installed"
-  } else {
+if ( Test-Path $Env:USERPROFILE\.oh-my-powershell ) {
+  Write-Output "Oh-My-Powershell is already installed"
+  if ( $force -eq $true ) {
+    Write-Output "Reinstalling Oh-My-Powershell"
     Install-OMP
   }
+} else {
+  Install-OMP
 }
 
