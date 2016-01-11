@@ -40,4 +40,4 @@ if ( Test-Path $Env:USERPROFILE\.oh-my-powershell ) {
 } else {
   Install-OMP
 }
-
+.$PROFILE
