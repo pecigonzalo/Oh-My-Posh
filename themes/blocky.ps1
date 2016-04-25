@@ -2,6 +2,7 @@
     $realCommandStatus = $?
     $realLASTEXITCODE = $LASTEXITCODE
     $Path = $pwd.ProviderPath
+    Write-Host
     Write-Host " $Path " -NoNewLine -ForegroundColor Black -BackgroundColor White
     if($gitStatus){
         checkGit($Path)
