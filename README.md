@@ -3,7 +3,7 @@
 
 [GitHub Page](http://leandrw.github.io/Oh-My-Powershell)
 
-After getting tired of mantaining my powershell profile, I decided to split the components and improve it, as I already use Oh-My-Zsh I thought it would be a good idea to have something similar on Powershell.
+After getting tired of mantaining my powershell profile, I decided to split the components and improve it, as I already use (Oh-My-Zsh)[ohmyz.sh] I thought it would be a good idea to have something similar on Powershell.
 
 Please feel free to submit issues/pull requests/questions/feature reqeusts.
 
