@@ -23,12 +23,18 @@ if ($AutoUpdate -eq $true) {
   if ($UpdateAfter -eq 0) { $update = 1 }
   # Call update script
   if ($update){
-    Write-Host "Starting update process"
-    & "$Env:USERPROFILE\.oh-my-powershell\update.ps1"
-    Add-CurrentTime
-    $update = 0
+    # Ask for user confirmation about update
+    $confirmation = Read-Host "Are you sure you want to update? [y/N]"
+    if ($confirmation -ieq "y"){
+        Write-Host "Starting update process"
+        & "$Env:USERPROFILE\.oh-my-powershell\update.ps1"
+        Add-CurrentTime
+        $update = 0
+    } else {
+        "Update canceled"
+    }    
   } else {
-    "No new updates to be installed"
+    "No updates avaiable"
   }
 }
 
