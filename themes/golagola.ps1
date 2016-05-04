@@ -10,12 +10,11 @@ function global:prompt {
 
     $Path = $pwd.ProviderPath
 
-
     Write-Host 
     Write-Host "$env:USERNAME" -NoNewLine -ForegroundColor Magenta
     Write-Host " @" -NoNewLine -ForegroundColor Yellow
     Write-Host " $Path " -NoNewLine -ForegroundColor Green
-    if($gitStatus){
+    if(Get-GitStatus){
         checkGit($Path)
     }
     Write-Host "`n>" -NoNewLine -ForegroundColor $EXIT
