@@ -3,7 +3,7 @@
     $Host.UI.RawUI.ForegroundColor = "White"
     Write-Host
     Write-Host $pwd.ProviderPath -NoNewLine -ForegroundColor Green
-    if(Get-GitStatus){
+    if($gitStatus){
         checkGit($pwd.ProviderPath)
     }
     $global:LASTEXITCODE = $realLASTEXITCODE

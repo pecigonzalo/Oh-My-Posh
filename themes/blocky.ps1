@@ -4,7 +4,7 @@
     $Path = $pwd.ProviderPath
     Write-Host
     Write-Host " $Path " -NoNewLine -ForegroundColor Black -BackgroundColor White
-    if(Get-GitStatus){
+    if($gitStatus){
         checkGit($Path)
     }
     if ( $realCommandStatus -eq $True ) {

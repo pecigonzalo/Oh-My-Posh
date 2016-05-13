@@ -14,7 +14,7 @@ function global:prompt {
     Write-Host "$env:USERNAME" -NoNewLine -ForegroundColor Magenta
     Write-Host " @" -NoNewLine -ForegroundColor Yellow
     Write-Host " $Path " -NoNewLine -ForegroundColor Green
-    if(Get-GitStatus){
+    if($gitStatus){
         checkGit($Path)
     }
     Write-Host "`n>" -NoNewLine -ForegroundColor $EXIT
