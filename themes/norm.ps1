@@ -1,25 +1,30 @@
+<# Based on norm zsh theme. Check it (https://github.com/robbyrussell/oh-my-zsh/blob/master/themes/norm.zsh-theme) #>
+
 function global:prompt {
     $realCommandStatus = $?
     $realLASTEXITCODE = $LASTEXITCODE
+    $lambda = [char]::ConvertFromUtf32(955)
+    $forwardArrow = [char]::ConvertFromUtf32(8594)
 
     if ( $realCommandStatus -eq $True ) {
-      $EXIT="Green"
+      $EXIT="Yellow"
     } else {
       $EXIT="Red"
-    }
-
-    $Path = $pwd.ProviderPath
+    }      
+    
+    $CurrentDirectory = Split-Path -leaf -path (Get-Location)
 
     Write-Host 
-    Write-Host "$env:USERNAME" -NoNewLine -ForegroundColor Magenta
-    Write-Host " @" -NoNewLine -ForegroundColor Yellow
-    Write-Host " $Path " -NoNewLine -ForegroundColor Green
-    if($gitStatus){
-        checkGit($Path)
+    Write-Host "$lambda $env:USERNAME " -ForegroundColor Yellow -NoNewline 
+    Write-Host "$CurrentDirectory" -NoNewLine -ForegroundColor Green
+        
+    if(Get-GitStatus){
+        Write-Host " $forwardArrow $lambda " -ForegroundColor Yellow -NoNewline
+        Write-Host "git" -ForegroundColor Blue -NoNewline           
+        checkGit(Get-Location)
     }
-    Write-Host "`n>" -NoNewLine -ForegroundColor $EXIT
 
-
+    Write-Host " $forwardArrow" -NoNewLine -ForegroundColor $EXIT
     $global:LASTEXITCODE = $realLASTEXITCODE
     return " "
 }

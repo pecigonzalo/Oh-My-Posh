@@ -1,6 +1,7 @@
 ﻿function global:prompt {
     $realLASTEXITCODE = $LASTEXITCODE
     $Host.UI.RawUI.ForegroundColor = "White"
+    Write-Host
     Write-Host $pwd.ProviderPath -NoNewLine -ForegroundColor Green
     if($gitStatus){
         checkGit($pwd.ProviderPath)
