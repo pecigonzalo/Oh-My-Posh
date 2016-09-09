@@ -1,5 +1,5 @@
 ###############################################################################
-# psreadline
+# psreadline configuration
 # http://runas.me/2014/08/28/powershell-console-conemu-psreadline/
 # http://www.reddit.com/r/sysadmin/comments/1rit4l/what_do_you_get_when_you_cross_bash_with_cmdexe/cdo3djk
 ###############################################################################
