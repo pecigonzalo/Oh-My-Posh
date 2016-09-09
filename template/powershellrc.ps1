@@ -13,8 +13,8 @@ $Modules_Install = $false
 # Uninstall any modules not specified here
 $Modules_Strict = $false
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-powershell/plugins/*)
-# Custom plugins may be added to ~/.oh-my-powershell/custom/plugins/
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-posh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-posh/custom/plugins/
 # Example format: $plugins= "git", "ls", "math"
 # Add wisely, as too many plugins slow down shell startup.
 $plugins= "git", "ls"
