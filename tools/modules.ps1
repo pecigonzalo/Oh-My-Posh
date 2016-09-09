@@ -18,8 +18,10 @@ function Clean ($Modules = "") {
     if ( $Installed.Name -eq "oh-my-posh" ) {
       # Do not remove myself
     } elseif ( ! ($Modules.Contains($Installed.Name) -or $Modules.Contains("$($Installed.Name):$($Installed.Version.ToString())")) ) {
-      Write-Host "Uninstalling $Installed"
-      # Uninstall-Module $Installed -Force
+      $confirmation = Read-Host "This will uninstalling $Installed [y/N]"
+      if ($confirmation -ieq "y"){
+          Uninstall-Module $Installed -Force
+      }
     }
   }
 }

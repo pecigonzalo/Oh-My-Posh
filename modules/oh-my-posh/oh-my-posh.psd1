@@ -12,7 +12,7 @@
 RootModule = 'oh-my-posh.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.6'
+ModuleVersion = '0.7'
 
 # ID used to uniquely identify this module
 GUID = '5f403c28-05ed-4be1-ae0a-7fcfab30b4df'

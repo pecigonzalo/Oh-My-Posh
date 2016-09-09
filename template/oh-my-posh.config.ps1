@@ -3,7 +3,7 @@ $Log_Level = ""
 
 # Autoupdate
 $AutoUpdate = $true
-$UpdateAfter = 7 # Update Frequency in days
+$UpdateAfter = 30 # Update Frequency in days
 
 # Modules
 # User this section if you want to delegate module loading to Oh-My-Powershell
