@@ -18,7 +18,7 @@ iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.co
 
 Add the following line to your powershell profile:
 ```
-Import-Module "Oh-My-Powershell" -DisableNameChecking -NoClobber
+Import-Module "Oh-My-Posh" -DisableNameChecking -NoClobber
 ```
 Now reload your Powershell profile
 
