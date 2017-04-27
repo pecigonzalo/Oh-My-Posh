@@ -6,13 +6,9 @@ function Install ($Module = "") {
   $Version = $Module.Split(":")[1]
 
   if ( $Version ) {
-    if (-Not (Get-InstalledModule -Name $Name -RequiredVersion $Version -ErrorAction SilentlyContinue)) {
-      Install-Module -Name $Name -Required $Version -Scope CurrentUser -AllowClobber
-    }
+    Install-Module -Name $Name -Required $Version -Scope CurrentUser -AllowClobber
   } else {
-    if (-Not (Get-InstalledModule -Name $Name -ErrorAction SilentlyContinue)) {
-      Install-Module -Name $Name -Scope CurrentUser -AllowClobber
-    }
+    Install-Module -Name $Name -Scope CurrentUser -AllowClobber
   }
 }
 
