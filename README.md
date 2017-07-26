@@ -1,5 +1,5 @@
-# Oh-My-Powershell
-[![Join the chat at https://gitter.im/pecigonzalo/Oh-My-Powershell](https://badges.gitter.im/pecigonzalo/Oh-My-Powershell.svg)](https://gitter.im/pecigonzalo/Oh-My-Powershell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Oh-My-Posh
+[![Join the chat at https://gitter.im/pecigonzalo/Oh-My-Posh](https://badges.gitter.im/pecigonzalo/Oh-My-Posh.svg)](https://gitter.im/pecigonzalo/Oh-My-Posh?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 After getting tired of mantaining my powershell profile, I decided to split the components and improve it, as I already use [Oh-My-Zsh](ohmyz.sh) I thought it would be a good idea to have something similar on Powershell.
 
@@ -12,13 +12,14 @@ Requires:
 * Powershell 4 (might work with 3 but its not tested)
 
 Run:
+
 ```powershell
-iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/pecigonzalo/Oh-My-Powershell/master/install.ps1'))
+iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/pecigonzalo/Oh-My-Posh/master/install.ps1'))
 ```
 
 Add the following line to your powershell profile:
 ```powershell
-Import-Module "Oh-My-Powershell" -DisableNameChecking -NoClobber
+Import-Module "Oh-My-Posh" -DisableNameChecking -NoClobber
 ```
 Now reload your Powershell profile
 

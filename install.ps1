@@ -10,31 +10,31 @@ function Install-OMP {
   Check-Recommends
   Check-Dependencies
 
-  Write-Output "Deleting $Env:USERPROFILE\.oh-my-powershell"
-  Remove-Item -Force -Recurse "$Env:USERPROFILE\.oh-my-powershell" -ErrorAction SilentlyContinue
+  Write-Output "Deleting $Env:USERPROFILE\.oh-my-posh"
+  Remove-Item -Force -Recurse "$Env:USERPROFILE\.oh-my-posh" -ErrorAction SilentlyContinue
   if ($local) {
     # Deploy from current folder
-    Write-Output "Coping Oh-My-Powershell to its destination"
-    Copy-Item -Recurse -Force .\  "$Env:USERPROFILE\.oh-my-powershell\"
+    Write-Output "Coping Oh-My-Posh to its destination"
+    Copy-Item -Recurse -Force .\  "$Env:USERPROFILE\.oh-my-posh\"
   } else {
     # Clone project
-    Write-Output "Cloning Oh-My-Powershell from Github"
-    git clone https://github.com/pecigonzalo/Oh-My-Powershell.git $Env:USERPROFILE\.oh-my-powershell
+    Write-Output "Cloning Oh-My-Posh from Github"
+    git clone https://github.com/pecigonzalo/Oh-My-Posh.git $Env:USERPROFILE\.oh-my-posh
   }
   # Copy module to the user modules folder
-  Write-Output "Installting Oh-My-Powershell Module"
+  Write-Output "Installting Oh-My-Posh Module"
   New-Item -Type Directory "$([Environment]::GetFolderPath("mydocuments"))\WindowsPowerShell\Modules" -Force | Out-Null
-  Copy-Item -Recurse -Force $Env:USERPROFILE\.oh-my-powershell\modules\oh-my-powershell  `
+  Copy-Item -Recurse -Force $Env:USERPROFILE\.oh-my-posh\modules\oh-my-posh  `
     "$([Environment]::GetFolderPath("mydocuments"))\WindowsPowerShell\Modules\"
 }
 
 #
 # Install logic
 #
-if ( Test-Path $Env:USERPROFILE\.oh-my-powershell ) {
-  Write-Output "Oh-My-Powershell is already installed"
+if ( Test-Path $Env:USERPROFILE\.oh-my-posh ) {
+  Write-Output "Oh-My-Posh is already installed"
   if ( $force -eq $true ) {
-    Write-Output "Reinstalling Oh-My-Powershell"
+    Write-Output "Reinstalling Oh-My-Posh"
     Install-OMP
   }
 } else {
