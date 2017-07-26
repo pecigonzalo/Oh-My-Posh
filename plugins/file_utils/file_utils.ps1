@@ -1,6 +1,3 @@
-
-
-
 # Credit Adam Driscoll
 # https://github.com/adamdriscoll/PoshInternals/blob/master/PendMoves.ps1
 # This can also be installed by installing the module PoshInternals

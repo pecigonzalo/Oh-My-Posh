@@ -1,5 +1,5 @@
 # Clone psutils if its not present
-if (!(Test-Path $PSScriptRoot/psutils)) {
+if (!(Test-Path "$PSScriptRoot\psutils")) {
   Write-Host "Installing psutils"
   git clone https://github.com/lukesampson/psutils $PSScriptRoot/psutils
 }

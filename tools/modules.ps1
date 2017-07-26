@@ -6,20 +6,26 @@ function Install ($Module = "") {
   $Version = $Module.Split(":")[1]
 
   if ( $Version ) {
-    Install-Module -Name $Name -Required $Version -Scope CurrentUser -Force
+    if (-Not (Get-InstalledModule -Name $Name -RequiredVersion $Version -ErrorAction SilentlyContinue)) {
+      Install-Module -Name $Name -Required $Version -Scope CurrentUser -AllowClobber
+    }
   } else {
-    Install-Module -Name $Name -Scope CurrentUser -Force
+    if (-Not (Get-InstalledModule -Name $Name -ErrorAction SilentlyContinue)) {
+      Install-Module -Name $Name -Scope CurrentUser -AllowClobber
+    }
   }
 }
 
 function Clean ($Modules = "") {
   $Installed_Modules = Get-Module -ListAvailable | Where-Object {$_.Path -like "$([Environment]::GetFolderPath("mydocuments"))\WindowsPowerShell\Modules*"}
   foreach ($Installed in $Installed_Modules) {
-    if ( $Installed.Name -eq "oh-my-powershell" ) {
+    if ( $Installed.Name -eq "oh-my-posh" ) {
       # Do not remove myself
     } elseif ( ! ($Modules.Contains($Installed.Name) -or $Modules.Contains("$($Installed.Name):$($Installed.Version.ToString())")) ) {
-      Write-Host "Uninstalling $Installed"
-      # Uninstall-Module $Installed -Force
+      $confirmation = Read-Host "This will uninstalling $Installed [y/N]"
+      if ($confirmation -ieq "y"){
+          Uninstall-Module $Installed -Force
+      }
     }
   }
 }
