@@ -1,10 +1,12 @@
+$INSTALL_PATH = "$HOME/.oh-my-posh"
+
 # Install modules
-& "$Env:USERPROFILE\.oh-my-posh\tools\modules.ps1"
+& "$INSTALL_PATH/tools/modules.ps1"
 
 # Handle Plugins
 foreach ($plugin in $plugins) {
-  Write-Verbose  "Loading from: $Env:USERPROFILE\.oh-my-posh\plugins\$plugin"
-  $files = Get-ChildItem $Env:USERPROFILE\.oh-my-posh\plugins\$plugin -Filter *.ps1
+  Write-Verbose  "Loading from: $INSTALL_PATH/plugins/$plugin"
+  $files = Get-ChildItem $INSTALL_PATH/plugins/$plugin -Filter *.ps1
   foreach ($file in $files) {
     Write-Verbose  "  Loading file: $($file.FullName)"
     . $file.FullName
@@ -12,4 +14,4 @@ foreach ($plugin in $plugins) {
 }
 
 # Load theme
-. "$Env:USERPROFILE\.oh-my-posh\themes\$theme.ps1"
+. "$INSTALL_PATH/themes/$theme.ps1"

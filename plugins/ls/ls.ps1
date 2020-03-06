@@ -5,25 +5,25 @@
 ###############################################################################
 function Get-ChildItem-Wide {
 
-    $width =  $host.UI.RawUI.WindowSize.Width
-    $pad = 2
+  $width = $host.UI.RawUI.WindowSize.Width
+  $pad = 2
 
-    # get the longest string and get the length
-    $childs = Get-ChildItem $Args
-    $lnStr = $childs | select-object Name | sort-object { "$_".length } -descending | select-object -first 1
-    $len = $lnStr.name.length
+  # get the longest string and get the length
+  $childs = Get-ChildItem $Args
+  $lnStr = $childs | select-object Name | sort-object { "$_".length } -descending | select-object -first 1
+  $len = $lnStr.name.length
 
-    $childs |
-    ForEach-Object {
-        $output = $_.name + (" "*($len - $_.name.length+$pad))
-        $count += $output.length
+  $childs |
+  ForEach-Object {
+    $output = $_.name + (" "*($len - $_.name.length + $pad))
+    $count += $output.length
 
-        Write-Host $output -nonewline
+    Write-Host $output -nonewline
 
-        if ( $count -ge ($width - ($len+$pad)) ) {
-          Write-Host ""
-          $count = 0
-      }
+    if ( $count -ge ($width - ($len + $pad)) ) {
+      Write-Host ""
+      $count = 0
+    }
   }
 }
 

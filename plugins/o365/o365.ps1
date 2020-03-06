@@ -5,7 +5,7 @@
 #
 # Start Exchange Online
 #
-function Connect-ExchangeOnline{
+function Connect-ExchangeOnline {
   $proxysettings = New-PSSessionOption -ProxyAccessType IEConfig
   $cred = Get-Credential
   $s = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://outlook.office365.com/powershell-liveid/ -Credential $cred -Authentication Basic -AllowRedirection -SessionOption $proxysettings -Verbose
@@ -20,7 +20,7 @@ function Connect-ExchangeLocal ( [string]$Server = "" ) {
 #
 # Start Lync Online
 #
-function Connect-LyncOnline{
+function Connect-LyncOnline {
   $proxysettings = New-PSSessionOption -ProxyAccessType IEConfig
   $cred = Get-Credential
   $s = New-CsOnlineSession -Credential $cred  -SessionOption $proxysettings -Verbose

@@ -1,4 +1,4 @@
-﻿function global:prompt {
+function global:prompt {
     $realLASTEXITCODE = $LASTEXITCODE
     $Host.UI.RawUI.ForegroundColor = "White"
     Write-Host
