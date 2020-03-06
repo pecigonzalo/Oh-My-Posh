@@ -34,6 +34,6 @@ cd C:\TEMP
 
 Configuration parameters are found under
 ```
-$env:USERPROFILE\.powershellrc.ps1
+$HOME/.oh-my-posh.config.ps1
 ```
 Open it with your prefered editor and change as you want, keep in mind some functionality is still WIP but don't hesitate on reporting any issue you have.
