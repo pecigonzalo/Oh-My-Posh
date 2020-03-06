@@ -2,7 +2,7 @@
 # Utilities
 #
 
-function Check-Recommends {
+function Test-Recommends {
   # Check PSCX installed
   if (!(Get-Module PSCX -ListAvailable)) {
     Write-Warning "PSCX not found, while not required it is recommended: https://www.powershellgallery.com/packages/Pscx/"

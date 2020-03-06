@@ -12,7 +12,7 @@ else {
 }
 $MODULES_PATH = "$env:PSModulePath".Split("$SEPARATOR")[0]
 
-function Check-Dependencies {
+function Test-Dependencies {
   $exit = 0
   # Check git installed
   try {
@@ -27,7 +27,7 @@ function Check-Dependencies {
 }
 
 function Install-OMP {
-  Check-Recommends
+  Test-Dependencies
 
   Write-Output "Deleting $INSTALL_PATH"
   Remove-Item -Force -Recurse "$INSTALL_PATH" -ErrorAction SilentlyContinue
@@ -57,7 +57,7 @@ if ( Test-Path "$INSTALL_PATH" ) {
     Install-OMP
     # Load utils
     . "$INSTALL_PATH/tools/utils.ps1"
-    Check-Dependencies
+    Test-Recommends
   }
 }
 else {
