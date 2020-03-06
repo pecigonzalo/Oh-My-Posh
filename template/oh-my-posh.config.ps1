@@ -2,7 +2,7 @@
 $Log_Level = ""
 
 # Autoupdate
-$AutoUpdate = $true
+$AutoUpdate = $false
 $UpdateAfter = 30 # Update Frequency in days
 
 # Modules
@@ -17,7 +17,7 @@ $Modules_Strict = $false
 # Custom plugins may be added to ~/.oh-my-posh/custom/plugins/
 # Example format: $plugins= "git", "ls", "math"
 # Add wisely, as too many plugins slow down shell startup.
-$plugins= "git", "ls"
+$plugins = "git", "ls"
 
 # Theme
-$theme = "Golagola"
+$theme = "golagola"

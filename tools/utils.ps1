@@ -6,7 +6,8 @@ function Check-Dependencies {
   # Check git installed
   try {
     Get-Command git -ErrorAction Stop | Out-Null
-  } catch {
+  }
+  catch {
     Write-Error "Git not found, please install git or add it to your PATH before running again"
     $exit = 1
   }

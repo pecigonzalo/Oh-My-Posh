@@ -4,14 +4,16 @@ param (
 )
 
 # Load utils
-. ./tools/utils.ps1
+. "./tools/utils.ps1"
 
 $INSTALL_PATH = "$HOME/.oh-my-posh"
-if ($IsWindows) {
+if ($IsWindows -or !$IsWindows) {
   $SEPARATOR = ";"
-} else {
+}
+else {
   $SEPARATOR = ":"
 }
+$MODULES_PATH = "$env:PSModulePath".Split("$SEPARATOR")[0]
 
 
 function Install-OMP {
@@ -23,15 +25,14 @@ function Install-OMP {
   if ($local) {
     # Deploy from current folder
     Write-Output "Coping Oh-My-Posh to its destination"
-    Copy-Item -Recurse -Force ./  "$INSTALL_PATH"
+    Copy-Item -Recurse -Force "./"  "$INSTALL_PATH"
   }
   else {
     # Clone project
     Write-Output "Cloning Oh-My-Posh from Github"
-    git clone https://github.com/pecigonzalo/Oh-My-Posh.git "$INSTALL_PATH"
+    git clone "https://github.com/pecigonzalo/Oh-My-Posh.git" "$INSTALL_PATH"
   }
   # Copy module to the user modules folder
-  $MODULES_PATH = "$env:PSModulePath".Split("$SEPARATOR")[0]
   Write-Output "Installting Oh-My-Posh Module to $MODULES_PATH"
   New-Item -Type Directory "$MODULES_PATH" -Force | Out-Null
   Copy-Item -Recurse -Force "$INSTALL_PATH/modules/oh-my-posh" "$MODULES_PATH"
