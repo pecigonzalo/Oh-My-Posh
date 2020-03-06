@@ -6,7 +6,7 @@ function Combine-Packer {
     [switch]$Run
   )
 
-  $filesToParse = Get-ChildItem | Where-Object {$_.Name -Like "*.packer.json"}
+  $filesToParse = Get-ChildItem | Where-Object { $_.Name -Like "*.packer.json" }
   $filesObject = $filesToParse | Get-Content -Raw | ConvertFrom-Json
 
   $baseJson = @"
@@ -22,11 +22,11 @@ function Combine-Packer {
   $baseObject = $baseJson | ConvertFrom-Json
 
   foreach ($fileObject in $filesObject) {
-      $baseObject.variables = $fileObject.variables
+    $baseObject.variables = $fileObject.variables
 
 
-      $baseObject.builders += $fileObject.builders
-      $baseObject.provisioners += $fileObject.provisioners
+    $baseObject.builders += $fileObject.builders
+    $baseObject.provisioners += $fileObject.provisioners
   }
 
   $jsonObject = $baseObject | ConvertTo-Json -Depth 100

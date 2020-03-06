@@ -15,39 +15,35 @@ Set-PSReadlineKeyHandler -Key "Ctrl+Q"            -Function "TabCompleteNext"
 Set-PSReadlineKeyHandler -Key "Ctrl+Shift+Q"      -Function "TabCompletePrevious"
 
 Set-PSReadlineKeyHandler -Key F1 `
-                         -BriefDescription CommandHelp `
-                         -LongDescription "Open the help window for the current command" `
-                         -ScriptBlock {
-    param($key, $arg)
+  -BriefDescription CommandHelp `
+  -LongDescription "Open the help window for the current command" `
+  -ScriptBlock {
+  param($key, $arg)
 
-    $ast = $null
-    $tokens = $null
-    $errors = $null
-    $cursor = $null
-    [PSConsoleUtilities.PSConsoleReadLine]::GetBufferState([ref]$ast, [ref]$tokens, [ref]$errors, [ref]$cursor)
+  $ast = $null
+  $tokens = $null
+  $errors = $null
+  $cursor = $null
+  [PSConsoleUtilities.PSConsoleReadLine]::GetBufferState([ref]$ast, [ref]$tokens, [ref]$errors, [ref]$cursor)
 
-    $commandAst = $ast.FindAll( {
-        $node = $args[0]
-        $node -is [System.Management.Automation.Language.CommandAst] -and
-            $node.Extent.StartOffset -le $cursor -and
-            $node.Extent.EndOffset -ge $cursor
-        }, $true) | Select-Object -Last 1
+  $commandAst = $ast.FindAll( {
+      $node = $args[0]
+      $node -is [System.Management.Automation.Language.CommandAst] -and
+      $node.Extent.StartOffset -le $cursor -and
+      $node.Extent.EndOffset -ge $cursor
+    }, $true) | Select-Object -Last 1
 
-    if ($commandAst -ne $null)
-    {
-        $commandName = $commandAst.GetCommandName()
-        if ($commandName -ne $null)
-        {
-            $command = $ExecutionContext.InvokeCommand.GetCommand($commandName, 'All')
-            if ($command -is [System.Management.Automation.AliasInfo])
-            {
-                $commandName = $command.ResolvedCommandName
-            }
+  if ($commandAst -ne $null) {
+    $commandName = $commandAst.GetCommandName()
+    if ($commandName -ne $null) {
+      $command = $ExecutionContext.InvokeCommand.GetCommand($commandName, 'All')
+      if ($command -is [System.Management.Automation.AliasInfo]) {
+        $commandName = $command.ResolvedCommandName
+      }
 
-            if ($commandName -ne $null)
-            {
-                Get-Help $commandName -ShowWindow
-            }
-        }
+      if ($commandName -ne $null) {
+        Get-Help $commandName -ShowWindow
+      }
     }
+  }
 }
