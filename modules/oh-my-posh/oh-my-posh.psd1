@@ -12,7 +12,7 @@
   RootModule        = 'oh-my-posh.psm1'
 
   # Version number of this module.
-  ModuleVersion     = '0.7'
+  ModuleVersion     = '0.8'
 
   # ID used to uniquely identify this module
   GUID              = '5f403c28-05ed-4be1-ae0a-7fcfab30b4df'
@@ -30,7 +30,7 @@
   Description       = 'Oh-My-Posh Magic'
 
   # Minimum version of the Windows PowerShell engine required by this module
-  PowerShellVersion = '4.0'
+  PowerShellVersion = '5.0'
 
   # Name of the Windows PowerShell host required by this module
   # PowerShellHostName = ''
