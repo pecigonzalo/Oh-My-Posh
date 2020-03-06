@@ -9,7 +9,7 @@ Please feel free to submit issues/pull requests/questions/feature reqeusts.
 
 Requires:
 * Git
-* Powershell 4 (might work with 3 but its not tested)
+* Powershell 5 (might work with 4 but its not tested)
 
 Run:
 ```
