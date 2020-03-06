@@ -3,9 +3,6 @@ param (
   [bool]$force = $false
 )
 
-# Load utils
-. "./tools/utils.ps1"
-
 $INSTALL_PATH = "$HOME/.oh-my-posh"
 if ($IsWindows -or !$IsWindows) {
   $SEPARATOR = ";"
@@ -15,10 +12,22 @@ else {
 }
 $MODULES_PATH = "$env:PSModulePath".Split("$SEPARATOR")[0]
 
+function Check-Dependencies {
+  $exit = 0
+  # Check git installed
+  try {
+    Get-Command git -ErrorAction Stop | Out-Null
+  }
+  catch {
+    Write-Error "Git not found, please install git or add it to your PATH before running again"
+    $exit = 1
+  }
+  # If any errors exit install
+  if ($exit) { exit 1 }
+}
 
 function Install-OMP {
   Check-Recommends
-  Check-Dependencies
 
   Write-Output "Deleting $INSTALL_PATH"
   Remove-Item -Force -Recurse "$INSTALL_PATH" -ErrorAction SilentlyContinue
@@ -46,6 +55,9 @@ if ( Test-Path "$INSTALL_PATH" ) {
   if ( $force -eq $true ) {
     Write-Output "Reinstalling Oh-My-Posh"
     Install-OMP
+    # Load utils
+    . "$INSTALL_PATH/tools/utils.ps1"
+    Check-Dependencies
   }
 }
 else {
