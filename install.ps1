@@ -42,7 +42,7 @@ function Install-OMP {
     git clone "https://github.com/pecigonzalo/Oh-My-Posh.git" "$INSTALL_PATH"
   }
   # Copy module to the user modules folder
-  Write-Output "Installting Oh-My-Posh Module to $MODULES_PATH"
+  Write-Output "Installing Oh-My-Posh Module to $MODULES_PATH"
   New-Item -Type Directory "$MODULES_PATH" -Force | Out-Null
   Copy-Item -Recurse -Force "$INSTALL_PATH/modules/oh-my-posh" "$MODULES_PATH"
 }
