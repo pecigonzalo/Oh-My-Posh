@@ -16,6 +16,10 @@ Run:
 ```powershell
 iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/pecigonzalo/Oh-My-Posh/master/install.ps1'))
 ```
+Note: If running this command throws an error like ``PowerShell_profile.ps1 cannot be loaded because running
+scripts is disabled on this system.``
+
+You may need to enable PS Execution Policy, which you can do by running ``Set-ExecutionPolicy -ExecutionPolicy RemoteSigned``
 
 Add the following line to your PowerShell profile:
 ```powershell
