@@ -42,3 +42,7 @@ Configuration parameters are found under
 $HOME/.oh-my-posh.config.ps1
 ```
 Open it with your preferred editor and change as you want, keep in mind some functionality is still WIP but don't hesitate on reporting any issue you have.
+
+# Note
+
+While this project shares the name with https://github.com/jandedobbeleer/oh-my-posh and https://ohmyposh.dev/, they are not the same project.
